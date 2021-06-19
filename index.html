@@ -14,7 +14,7 @@
           <form onsubmit="event.preventDefault(); onFormSubmit();" autocomplete="off">
 
             <div>
-              <label>Full Name</label>
+              <label>Full Name</label><label class="validation-error hide" id="fullNameValidationError"/>*This Field is Required!</label>
               <input type="text" name="fullName" id="fullName"/>
             </div>
 

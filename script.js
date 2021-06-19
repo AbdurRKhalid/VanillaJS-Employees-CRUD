@@ -1,13 +1,15 @@
 var selectedRow = null;
 
 function onFormSubmit() {
-  var formData = readFormData();
-  if (selectedRow == null) {
-    insertNewRecord(formData);
-  } else {
-    updateEmployee(formData);
+  if (validation()) {
+    var formData = readFormData();
+    if (selectedRow == null) {
+      insertNewRecord(formData);
+    } else {
+      updateEmployee(formData);
+    }
+    resetForm();
   }
-  resetForm();
 }
 
 function readFormData() {
@@ -67,4 +69,22 @@ function deleteEmployee(td) {
     document.getElementById("employeeList").deleteRow(row.rowIndex);
     resetForm();
   }
+}
+
+function validation() {
+  isValid = true;
+  if (document.getElementById("fullName").value == "") {
+    isValid = false;
+    document.getElementById("fullNameValidationError").classList.remove("hide");
+  } else {
+    isValid = true;
+    if (
+      !document
+        .getElementById("fullNameValidationError")
+        .classList.remove("hide")
+    ) {
+      document.getElementById("fullNameValidationError").classList.add("hide");
+    }
+  }
+  return isValid;
 }
