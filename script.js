@@ -1,6 +1,13 @@
+var selectedRow = null;
+
 function onFormSubmit() {
     var formData = readFormData();
-    insertNewRecord(formData);
+    if(selectedRow == null) {
+        insertNewRecord(formData);
+    }
+    else {
+        updateEmployee(formData);
+    }
     resetForm();
 }
 
@@ -36,12 +43,21 @@ function resetForm() {
     document.getElementById("designation").value = "";
     document.getElementById("salaray").value = "";
     document.getElementById("location").value = "";
+    selectedRow = null;
 }
 
 function editEmployee(td) {
-    var selectedRow = td.parentElement.parentElement;
+    selectedRow = td.parentElement.parentElement;
     document.getElementById("fullName").value = selectedRow.cells[0].innerHTML;
     document.getElementById("designation").value = selectedRow.cells[1].innerHTML;
     document.getElementById("salaray").value = selectedRow.cells[2].innerHTML;
     document.getElementById("location").value = selectedRow.cells[3].innerHTML;
+}
+
+
+function updateEmployee(formData) {
+    selectedRow.cells[0].innerHTML = formData.fullName;
+    selectedRow.cells[1].innerHTML = formData.designation;
+    selectedRow.cells[2].innerHTML = formData.salaray;
+    selectedRow.cells[3].innerHTML = formData.location;
 }
