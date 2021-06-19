@@ -1,6 +1,7 @@
 function onFormSubmit() {
     var formData = readFormData();
     insertNewRecord(formData);
+    resetForm();
 }
 
 function readFormData() {
@@ -27,5 +28,20 @@ function insertNewRecord(data) {
     var cell3 = newRow.insertCell(3);
     cell3.innerHTML = data.location;
     var cell4 = newRow.insertCell(4);
-    cell4.innerHTML = `<a>Edit</a> <a>Delete</a>`;
+    cell4.innerHTML = `<a onClick= "editEmployee(this);">Edit</a> <a>Delete</a>`;
+}
+
+function resetForm() {
+    document.getElementById("fullName").value = "";
+    document.getElementById("designation").value = "";
+    document.getElementById("salaray").value = "";
+    document.getElementById("location").value = "";
+}
+
+function editEmployee(td) {
+    var selectedRow = td.parentElement.parentElement;
+    document.getElementById("fullName").value = selectedRow.cells[0].innerHTML;
+    document.getElementById("designation").value = selectedRow.cells[1].innerHTML;
+    document.getElementById("salaray").value = selectedRow.cells[2].innerHTML;
+    document.getElementById("location").value = selectedRow.cells[3].innerHTML;
 }
